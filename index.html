@@ -3,149 +3,336 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Satyendra Maurya | Official Portfolio</title>
+    <title>Utkarsh Maurya | Official Platform</title>
     <style>
         :root {
-            --bg-color: #0a0f1d;
-            --card-bg: #131c31;
-            --accent-color: #3b82f6;
-            --text-main: #ffffff;
-            --text-muted: #94a3b8;
+            --bg-main: #0b0f19;
+            --bg-sidebar: #111827;
+            --bg-card: #1f2937;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.3);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
+            background-color: var(--bg-main);
             color: var(--text-main);
             display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .portfolio-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            padding: 40px;
-            max-width: 450px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-        }
-
-        .profile-img-container {
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 24px;
-            border-radius: 50%;
-            border: 4px solid var(--accent-color);
+            height: 100vh;
             overflow: hidden;
-            background: #1e293b;
+        }
+
+        /* --- LEFT SIDEBAR (PHOTO & NAVIGATION) --- */
+        .sidebar {
+            width: 350px;
+            background-color: var(--bg-sidebar);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            height: 100%;
+        }
+
+        .photo-showcase {
+            width: 220px;
+            height: 280px;
+            border-radius: 16px;
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 25px var(--accent-glow);
+            overflow: hidden;
+            background: #1f2937;
+            margin-bottom: 25px;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
         }
 
-        .profile-img-container img {
+        .photo-showcase img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        h1 {
-            font-size: 28px;
-            margin: 0 0 8px 0;
+        .profile-name {
+            font-size: 24px;
             font-weight: 700;
             letter-spacing: -0.5px;
+            margin-bottom: 5px;
+            text-align: center;
         }
 
-        .subtitle {
-            color: var(--accent-color);
-            font-size: 16px;
+        .profile-title {
+            font-size: 14px;
+            color: var(--accent);
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 24px;
+            margin-bottom: 40px;
+            text-align: center;
         }
 
-        .info-section {
+        .nav-menu {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 14px 20px;
+            border-radius: 12px;
             text-align: left;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 24px;
-        }
-
-        .info-item {
-            margin-bottom: 12px;
-            font-size: 15px;
-        }
-
-        .info-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .label {
-            color: var(--text-muted);
-            font-weight: 500;
-            display: inline-block;
-            width: 100px;
-        }
-
-        .value {
-            color: var(--text-main);
+            font-size: 16px;
             font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .footer-tag {
-            font-size: 12px;
+        .nav-btn:hover, .nav-btn.active {
+            background-color: var(--accent);
+            color: var(--text-main);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+        }
+
+        /* --- RIGHT CONTENT AREA (FULL SIZE) --- */
+        .content-area {
+            flex: 1;
+            height: 100%;
+            padding: 50px;
+            overflow-y: auto;
+            background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.05), transparent);
+        }
+
+        .page-section {
+            display: none;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .section-desc {
             color: var(--text-muted);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 16px;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        /* --- GRID AND CARDS --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .info-card {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 25px;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .card-text {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* --- SYSTEM METRICS / EXTRA DETAIL --- */
+        .metrics-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .metrics-table th, .metrics-table td {
+            padding: 16px 24px;
+            text-align: left;
+        }
+
+        .metrics-table th {
+            background-color: rgba(255, 255, 255, 0.02);
+            color: var(--accent);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metrics-table tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .metrics-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .status-badge {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
 
-    <div class="portfolio-card">
-        <!-- Profile Image Section -->
-        <div class="profile-img-container">
-            <!-- अपनी फोटो का नाम यहाँ बदलें (e.g., my-pic.jpg) -->
-            <img src="profile.jpg" alt="Satyendra Maurya">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="photo-showcase">
+            <!-- अपनी फोटो यहाँ अपलोड करें, नाम 'profile.jpg' रखें -->
+            <img src="profile.jpg" alt="Utkarsh Maurya">
         </div>
+        <div class="profile-name">Utkarsh Maurya</div>
+        <div class="profile-title">Developer & Analyst</div>
 
-        <!-- Identity -->
-        <h1>Satyendra Maurya</h1>
-        <div class="subtitle">Founder, Utkarsh Quantum Solver</div>
-
-        <!-- Personal Details Box -->
-        <div class="info-section">
-            <div class="info-item">
-                <span class="label">Stream:</span>
-                <span class="value">Science & Technology</span>
-            </div>
-            <div class="info-item">
-                <span class="label">Specialization:</span>
-                <span class="value">Algorithms & Chess Tactics</span>
-            </div>
-            <div class="info-item">
-                <span class="label">Status:</span>
-                <span class="value">Verified Official Profile</span>
-            </div>
-        </div>
-
-        <!-- Professional Footer -->
-        <div class="footer-tag">
-            &copy; 2026 Utkarsh Quantum Solver. All Rights Reserved.
-        </div>
+        <nav class="nav-menu">
+            <button class="nav-btn active" onclick="switchPage('home')">Home Dashboard</button>
+            <button class="nav-btn" onclick="switchPage('projects')">Core Projects</button>
+            <button class="nav-btn" onclick="switchPage('security')">Verification & Metrics</button>
+        </nav>
     </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <div class="content-area">
+        
+        <!-- PAGE 1: HOME -->
+        <div id="home" class="page-section active">
+            <h2>Official Profile Overview</h2>
+            <div class="section-desc">Centralized data portal for secure verification and specialization fields.</div>
+            
+            <div class="grid-container">
+                <div class="info-card">
+                    <div class="card-icon">🧠</div>
+                    <div class="card-title">Advanced Core Specialization</div>
+                    <div class="card-text">Focused on algorithmic structure, behavioral analytics, and system problem-solving methodologies.</div>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">⚡</div>
+                    <div class="card-title">Strategic System Engineering</div>
+                    <div class="card-text">Specialized in tactical pattern recognition, intelligence framework assessments, and security analysis.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 2: PROJECTS -->
+        <div id="projects" class="page-section">
+            <h2>Core Projects & Deployments</h2>
+            <div class="section-desc">Documentation of highly ranked web platforms and system integrations.</div>
+            
+            <div class="grid-container">
+                <div class="info-card">
+                    <div class="card-icon">🌐</div>
+                    <div class="card-title">Utkarsh Quantum Solver</div>
+                    <div class="card-text">An advanced online resolving matrix engineered for search engine compliance and automated indexing optimization. Fully indexed and ranked at peak performance levels.</div>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">🛡️</div>
+                    <div class="card-title">Blind Cyber Sniffing Detection</div>
+                    <div class="card-text">Conceptual network automation architecture designed to inspect terminal protocols, packet anomalies, and environment parameters dynamically.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 3: SECURITY -->
+        <div id="security" class="page-section">
+            <h2>System Logs & Verification</h2>
+            <div class="section-desc">Cryptographic identity validation parameters and live core status details.</div>
+            
+            <table class="metrics-table">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Deployment Value</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Profile Identity</td>
+                        <td>Utkarsh Maurya</td>
+                        <td><span class="status-badge">Verified</span></td>
+                    </tr>
+                    <tr>
+                        <td>Platform Authority</td>
+                        <td>Root Administrator</td>
+                        <td><span class="status-badge">Active</span></td>
+                    </tr>
+                    <tr>
+                        <td>Encryption Integrity</td>
+                        <td>SHA-256 Protocol Enabled</td>
+                        <td><span class="status-badge">Secure</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT FOR PAGE SWITCHING -->
+    <script>
+        function switchPage(pageId) {
+            // Remove active class from all sections
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            // Remove active class from all buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Add active class to target section and button
+            document.getElementById(pageId).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
 
 </body>
 </html>
-
